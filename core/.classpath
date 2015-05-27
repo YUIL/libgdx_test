@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="lib" path="E:/WorkSpace_liuyu/GitHub/libgdx/extensions/gdx-bullet/gdx-bullet.jar" sourcepath="E:/WorkSpace_liuyu/GitHub/libgdx/extensions/gdx-bullet/sources">
+		<attributes>
+			<attribute name="source_encoding" value="UTF-8"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="E:/WorkSpace_liuyu/GitHub/libgdx/extensions/gdx-bullet/gdx-bullet-natives.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
