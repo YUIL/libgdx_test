@@ -3,7 +3,6 @@ package com.mygdx.game.screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
@@ -26,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.inputprocessor.InputProcessor;
+import com.mygdx.game.util.GameManager;
 
 public class RayPickingTestScreen extends InputAdapter implements Screen {
 
@@ -92,8 +92,8 @@ public class RayPickingTestScreen extends InputAdapter implements Screen {
 	        cam.update();
 
 	        camController = new CameraInputController(cam);
-	        Gdx.input.setInputProcessor(new InputMultiplexer(this, camController));
-
+	    	
+	        GameManager.setInputProcessor(this,camController);
 	        assets = new AssetManager();
 	        assets.load( "data/invaderscene.g3db", Model.class);
 	        loading = true;
@@ -153,7 +153,7 @@ public class RayPickingTestScreen extends InputAdapter implements Screen {
         label.setText(stringBuilder);
         stage.draw();
         
-        InputProcessor.handleInput(game);
+        InputProcessor.handleInput(game,delta);
     }
 
     protected boolean isVisible (final Camera cam, final GameObject instance) {

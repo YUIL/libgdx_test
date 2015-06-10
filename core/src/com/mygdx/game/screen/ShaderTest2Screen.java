@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.shader.TestShader;
 import com.mygdx.game.shader.TestShader.TestColorAttribute;
+import com.mygdx.game.util.GameManager;
 
 public class ShaderTest2Screen implements Screen {
 	Game game;
@@ -39,7 +40,7 @@ public class ShaderTest2Screen implements Screen {
 	       cam.update();
 
 	       camController = new CameraInputController(cam);
-	       Gdx.input.setInputProcessor(camController);
+	       GameManager.setInputProcessor(camController);
 
 	       ModelBuilder modelBuilder = new ModelBuilder();
 	       model = modelBuilder.createSphere(2f, 2f, 2f, 20, 20,
@@ -84,7 +85,7 @@ public class ShaderTest2Screen implements Screen {
 	        modelBatch.render(instance, shader);
 	    modelBatch.end();
 	    
-	    com.mygdx.game.inputprocessor.InputProcessor.handleInput(game);
+	    com.mygdx.game.inputprocessor.InputProcessor.handleInput(game,delta);
 	}
 
 	@Override

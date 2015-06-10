@@ -28,15 +28,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.inputprocessor.InputProcessor;
+import com.mygdx.game.util.GameManager;
 
 public class ShapeTestScreen extends InputAdapter implements Screen {
-	
-	
-	
-	
-	
-	
-	
+
 	public interface Shape {
 		public abstract boolean isVisible(Matrix4 transform, Camera cam);
 
@@ -51,14 +46,13 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 		public BaseShape(BoundingBox bounds) {
 			bounds.getCenter(center);
 			bounds.getDimensions(dimensions);
-			
+
 		}
 
 	}
 
 	public static class Sphere extends BaseShape {
 		public float radius;
-		
 
 		public Sphere(BoundingBox bounds) {
 			super(bounds);
@@ -160,14 +154,6 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	Game game;
 
 	protected PerspectiveCamera cam;
@@ -210,10 +196,13 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 
 		modelBatch = new ModelBatch();
 		environment = new Environment();
-		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f,
+				0.4f, 0.4f, 1f));
+		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f,
+				-0.8f, -0.2f));
 
-		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight());
 		cam.position.set(0f, 7f, 10f);
 		cam.lookAt(0, 0, 0);
 		cam.near = 1f;
@@ -221,10 +210,12 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 		cam.update();
 
 		camController = new CameraInputController(cam);
-		Gdx.input.setInputProcessor(new InputMultiplexer(this, camController));
+
+		GameManager
+				.setInputProcessor(new InputMultiplexer(this, camController));
 
 		assets = new AssetManager();
-		assets.load(  "data/invaderscene.g3db", Model.class);
+		assets.load("data/invaderscene.g3db", Model.class);
 		loading = true;
 
 		selectionMaterial = new Material();
@@ -326,7 +317,7 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 		label.setText(stringBuilder);
 		stage.draw();
 
-		InputProcessor.handleInput(game);
+		InputProcessor.handleInput(game, delta);
 	}
 
 	@Override
@@ -358,19 +349,19 @@ public class ShapeTestScreen extends InputAdapter implements Screen {
 		}
 		return false;
 	}
+
 	@Override
-	public boolean mouseMoved(int screenX, int screenY){
-	
-		/*selected=0;
-		Ray ray = cam.getPickRay(screenX, screenY);
-		final float distance = -ray.origin.y / ray.direction.y;
-		position.set(ray.direction).scl(distance).add(ray.origin);
-		instances.get(selected).transform.setTranslation(position);
-		selected=-1;*/
+	public boolean mouseMoved(int screenX, int screenY) {
+
+		/*
+		 * selected=0; Ray ray = cam.getPickRay(screenX, screenY); final float
+		 * distance = -ray.origin.y / ray.direction.y;
+		 * position.set(ray.direction).scl(distance).add(ray.origin);
+		 * instances.get(selected).transform.setTranslation(position);
+		 * selected=-1;
+		 */
 		return true;
-		
-		
-		
+
 	}
 
 	public void setSelected(int value) {

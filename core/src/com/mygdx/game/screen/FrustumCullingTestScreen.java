@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.inputprocessor.InputProcessor;
+import com.mygdx.game.util.GameManager;
 
 
 public class FrustumCullingTestScreen implements Screen {
@@ -87,7 +88,8 @@ public class FrustumCullingTestScreen implements Screen {
 		cam.update();
 
 		camController = new CameraInputController(cam);
-		Gdx.input.setInputProcessor(camController);
+		GameManager.setInputProcessor(camController);
+	
 
 		assets = new AssetManager();
 		assets.load("data/invaders.g3db", Model.class);
@@ -166,7 +168,7 @@ public class FrustumCullingTestScreen implements Screen {
 		label.setText(stringBuilder);
 		stage.draw();
 
-		InputProcessor.handleInput(game);
+		InputProcessor.handleInput(game,delta);
 	}
 
 	@Override

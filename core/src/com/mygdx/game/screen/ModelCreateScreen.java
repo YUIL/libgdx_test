@@ -2,6 +2,7 @@ package com.mygdx.game.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.mygdx.game.inputprocessor.InputProcessor;
+import com.mygdx.game.stage.StageManager;
+import com.mygdx.game.util.GameManager;
 
 public class ModelCreateScreen implements Screen {
 	Game game;
@@ -45,12 +48,16 @@ public class ModelCreateScreen implements Screen {
 		cam.update();
 		
 		camController=new CameraInputController(cam);
-		Gdx.input.setInputProcessor(camController);
+		GameManager.setInputProcessor(camController);
 		
 		ModelBuilder modelBuilder =new ModelBuilder();
 		model=modelBuilder.createBox(5f, 5f, 5f, new Material(ColorAttribute.createDiffuse(Color.GREEN)), Usage.Position|Usage.Normal);
 		instance=new ModelInstance(model);
-
+		
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		
+		multiplexer.addProcessor(StageManager.superStage);
+		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 	@Override
@@ -69,7 +76,7 @@ public class ModelCreateScreen implements Screen {
 		modelBatch.begin(cam);
 		modelBatch.render(instance,environment);
 		modelBatch.end();
-		InputProcessor.handleInput(game);
+		InputProcessor.handleInput(game,delta);
 		
 	}
 

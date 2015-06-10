@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.inputprocessor.InputProcessor;
+import com.mygdx.game.util.GameManager;
 
 public class ModelLoadScreen implements Screen {
 	Game game;
@@ -44,7 +45,7 @@ public class ModelLoadScreen implements Screen {
 		cam.update();
 
 		camController = new CameraInputController(cam);
-		Gdx.input.setInputProcessor(camController);
+		GameManager.setInputProcessor(camController);
 
 		assets = new AssetManager();
 		//assets.load("data/invaderscene.g3db", Model.class);
@@ -88,7 +89,7 @@ public class ModelLoadScreen implements Screen {
 		modelBatch.begin(cam);
 		modelBatch.render(instances, environment);
 		modelBatch.end();
-		InputProcessor.handleInput(game);
+		InputProcessor.handleInput(game,delta);
 	}
 
 	@Override
